@@ -40,3 +40,4 @@ In addition to all arguments above, the following attributes are exported:
 * `configuration_endpoint_address` - The configuration endpoint address to allow host discovery.
 * `primary_endpoint_address` - The endpoint of the primary node in this node group (shard).
 * `read_endpoint_addresses` - Reader endpoints of the nodes in this node group.
+* `reader_endpoint_address` - The endpoint of the reader node in this node group (shard).
