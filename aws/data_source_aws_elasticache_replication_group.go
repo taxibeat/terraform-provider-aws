@@ -119,7 +119,10 @@ func dataSourceAwsElasticacheReplicationGroupRead(d *schema.ResourceData, meta i
 
 		var rEndpoints []*string
 		for _, member := range rg.NodeGroups[0].NodeGroupMembers {
-			rEndpoints = append(rEndpoints, member.ReadEndpoint.Address)
+			/* Do not add primary host to the list of readers */
+			if *member.CurrentRole == "replica" {
+				rEndpoints = append(rEndpoints, member.ReadEndpoint.Address)
+			}
 		}
 		if err := d.Set("read_endpoint_addresses", flattenStringList(rEndpoints)); err != nil {
 			return fmt.Errorf("error setting read_endpoint_addresses: %s", err)
